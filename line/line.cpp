@@ -4,18 +4,25 @@
 #include <cmath>
 #include <iostream>
 
-Line::Line(const Point& a, const Point& b)
+Line::Line()
+    : a(0, 0)
+    , b(0, 0)
+{
+	std::cout << "Default Constructor - Line" << std::endl;
+}
+
+Line::Line(const Point& s, const Point& e)
+    : a(s)
+    , b(e)
 {
 	std::cout << "Constructor - Line" << std::endl;
-    Line::a = a;
-    Line::b = b;
 }
 
 Line::Line(const Line& l)
+	: a(l.a)
+	, b(l.b)
 {
 	std::cout << "Copy constructor - Line" << std::endl;
-	a = l.a;
-	b = l.b;
 }
 
 const Line& Line::operator=(const Line& l)

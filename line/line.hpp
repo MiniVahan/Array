@@ -12,6 +12,7 @@ private:
 	Point a;
 	Point b;
 public:
+    Line();
     Line(const Point& a, const Point& b);
     Line(const Line& l);
 	const Line& operator=(const Line& l);
