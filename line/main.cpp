@@ -1,4 +1,3 @@
-
 #include "point.hpp"
 #include "line.hpp"
 
@@ -26,5 +25,7 @@ int main()
 	Line l2(c, b);
 	l2 = l;
     assert(l.length() == l2.length());
+	assert(a == b);
+	assert(a != o);
 	return 0;
 }

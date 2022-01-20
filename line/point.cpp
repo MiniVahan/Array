@@ -30,6 +30,22 @@ int Point::getY() const
 	return y;
 }
 
+bool Point::operator==(const Point& b)
+{
+	if (this->x == b.x and this->y == b.y) {
+		return true;
+	}
+	return false;
+}
+
+bool Point::operator!=(const Point& b)
+{
+	if (this->x == b.x and this->y == b.y) {
+		return false;
+	}
+	return true;
+}
+
 const Point& Point::operator=(const Point& b)
 {
 	std::cout << "Assignment Operator" << std::endl;
