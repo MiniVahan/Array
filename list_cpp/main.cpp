@@ -62,10 +62,10 @@ void test_pop_front()
 
 void test_copy_constructor()
 {
-	list b(56, 0);
-    assert(b.size() == 56);
+	list b(5, 0);
+    assert(b.size() == 5);
     list a(b);
-    assert(a.size() == 56);
+    assert(a.size() == 5);
     for (list::size_type i = 0; i < a.size(); ++i) {
          assert(a.access(i) == 0);
     }
@@ -80,6 +80,5 @@ int main()
     test_pop_back();
     test_pop_front();
     test_copy_constructor();
-	list a(5,10);
 	return 0;
 }

@@ -129,9 +129,22 @@ list::list(size_type n, const value_type& default_value)
 }
 
 list::list(const list& b)
+	: m_head(nullptr)
 {
 	std::cout << "Copy constructor" << std::endl;
-    this->m_head = b.m_head;
+ 	node* current = b.m_head;
+ 	node* previous = nullptr;
+	while (current!=nullptr) {
+	   	node* new_node = new node(current->m_value, nullptr);
+        if (this->m_head != nullptr) {
+			previous->m_next = new_node;
+			previous = previous->m_next;
+        } else {
+            m_head = new_node;
+			previous = m_head;
+        }
+    	current = current->m_next;
+	}
 }
 
 
@@ -149,6 +162,7 @@ list::~list()
 	while (current != nullptr) {
 		m_head = current;
 		current = current->m_next;
-		m_head = nullptr;
+		delete m_head;
 }
+	delete current;
 }
