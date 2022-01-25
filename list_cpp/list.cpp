@@ -158,11 +158,15 @@ const list& list::operator=(const list& c)
 list::~list()
 {
 	std::cout << "Destructor" << std::endl;
-	node* current = m_head;
-	while (current != nullptr) {
-		m_head = current;
-		current = current->m_next;
-		delete m_head;
-}
-	delete current;
+//	node* current = nullptr;
+//	node* to_delete = m_head;
+//	while (current != nullptr) {
+//		to_delete = current;
+//		current = current->m_next;
+//		delete to_delete;
+//}
+//	delete m_head;
+	while (!empty()) {
+		pop_back();
+	}
 }
