@@ -11,7 +11,7 @@ class string {
 		int get_size() const;
 		char* append(char* new_str);
 		const string& swap(string& s);
-		//char* find_first_of(char* new_str);
+		bool find_first_of(const string& s);
 	public:
 		string();
 		string(char* new_str);

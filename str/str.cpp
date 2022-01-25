@@ -3,6 +3,34 @@
 #include <iostream>
 #include <cstring>
 
+
+bool string::find_first_of(const string& s)
+{
+	char * test = new char[strlen(s.str)];
+	bool flag = false;
+	for (int i = 0; i<strlen(str); i++) {
+		if (str[i] == s.str[0]) {
+			int count = i;
+			for (int index = 0; index<strlen(s.str); index++) {
+				*(test+index) = *(str+count);
+				count++;
+			}
+			for (int a=0; a<strlen(s.str);a++) {
+				if (test[a] == s.str[a]) {
+					flag = true;
+				} else {
+					flag = false;
+				}
+			}
+			if (flag == true) {
+				return flag;
+			}
+		}
+	}
+	return flag;
+
+}
+
 const string& string::swap(string& s)
 {
 	char * test = new char[strlen(s.str)];

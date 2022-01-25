@@ -18,8 +18,15 @@ void test_operators()
 	my_str += new_str;
 	//std::cout << my_str.getStr() << std::endl;
 	//std::cout << my_str[5] << std::endl;
-	bool test = my_str < new_str;
+	bool test = new_str < my_str;
 	//std::cout << "my_str < new_stri = " <<test << std::endl;
+	char test3[] = "Hello world wrld";
+	char test4[] = "wrld";
+	string str(test3);
+	string str2(test4);
+	bool test_find = str.find_first_of(str2);
+	assert( test_find == true);
+	std::cout << "find = " << test_find << std::endl;
 }
 
 
