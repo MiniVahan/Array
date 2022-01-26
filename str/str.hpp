@@ -1,15 +1,13 @@
 #ifndef STR_H
 #define STR_H
 
-#include <string>
-
 class string {
 	private:
 		char* str;
 	public:
 		char* getStr() const;
 		int get_size() const;
-		char* append(char* new_str);
+		const string& append(const string& new_str);
 		const string& swap(string& s);
 		bool find_first_of(const string& s);
 	public:

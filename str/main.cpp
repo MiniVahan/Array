@@ -3,30 +3,35 @@
 #include <cassert>
 #include <iostream>
 
-
 void test_operators()
 {
 	char test1[] = "hello";
 	char test2[] = ", world";
 	string my_str(test1);
 	string new_str(test2);
+	std::cout<<"Before swap "<< '\n' << "my_str = "<< my_str.getStr() << std::endl;
+	std::cout << "new_str = " << new_str.getStr() << std::endl;
 	my_str.swap(new_str);
-	std::cout << my_str.getStr() << std::endl;
-	std::cout << new_str.getStr() << std::endl;
+	std::cout<<"After swap "<< '\n' << "my_str = " << my_str.getStr() << std::endl;
+	std::cout << "new_str = " << new_str.getStr() << std::endl;
 	my_str+new_str;
-	//std::cout << my_str.getStr() << std::endl;
+	//std::cout << "after operator +" << my_str.getStr() << std::endl;
 	my_str += new_str;
 	//std::cout << my_str.getStr() << std::endl;
 	//std::cout << my_str[5] << std::endl;
+	char f_1[] = "xx";
+	char f_2[] = "aaa";
+	string f1(f_1);
+	string f2(f_2);
+	bool t = f2 < f1;
 	bool test = new_str < my_str;
-	//std::cout << "my_str < new_stri = " <<test << std::endl;
+	//std::cout << "aaa < xx " << t  << " "<< true<< std::endl;
 	char test3[] = "Hello world wrld";
 	char test4[] = "wrld";
 	string str(test3);
 	string str2(test4);
 	bool test_find = str.find_first_of(str2);
-	assert( test_find == true);
-	std::cout << "find = " << test_find << std::endl;
+	assert(test_find == true);
 }
 
 
@@ -45,9 +50,10 @@ void test_append()
 {
 	char test1[] = "hello";
 	char test2[] = ", world";
-	string new_str(test1);
-	new_str.append(test2);
-	std::cout << new_str.getStr() << std::endl;
+	string str(test1);
+	string new_str(test2);
+	str.append(test2);
+	std::cout << str.getStr() << std::endl;
 }
 
 void test_get_size()

@@ -2,53 +2,44 @@
 
 #include <iostream>
 #include <cstring>
-
+#include <cassert>
 
 bool string::find_first_of(const string& s)
 {
-	char * test = new char[strlen(s.str)];
-	bool flag = false;
-	for (int i = 0; i<strlen(str); i++) {
+	int s_str = strlen(s.str);
+	int str_len = strlen(str);
+	char * test = new char[s_str];
+	for (int i = 0; i<str_len; i++) {
 		if (str[i] == s.str[0]) {
 			int count = i;
-			for (int index = 0; index<strlen(s.str); index++) {
+			for (int index = 0; index<s_str; index++) {
 				*(test+index) = *(str+count);
 				count++;
 			}
-			for (int a=0; a<strlen(s.str);a++) {
-				if (test[a] == s.str[a]) {
-					flag = true;
-				} else {
-					flag = false;
-				}
-			}
-			if (flag == true) {
-				return flag;
+			if (strcmp(test, s.str) == 0) {
+				return true;
+			} else {
+				delete [] test;
+				test = new char[s_str];
 			}
 		}
 	}
-	return flag;
-
+	return false;
 }
+
 
 const string& string::swap(string& s)
 {
-	char * test = new char[strlen(s.str)];
-	for (int i = 0; i<strlen(s.str); i++) {
-		*(test+i) = *(s.str+i);
-	}
-	for (int i = 0; i<strlen(s.str); i++) {
-		*(s.str+i) = str[i];
-	}
-	for (int i = 0; i<strlen(test); i++) {
-		str[i] = *(test+i);
-	}
+	string t;
+	t = s;
+	s = *this;
+	*this = t;
 	return *this;
 }
 
 bool string::operator<(const string& s)
 {
-	if ( strlen(str) < s.get_size()) {
+	if (strcmp(str, s.str) < 0) {
 		return true;
 	}
 	return false;
@@ -61,20 +52,15 @@ char string::operator[](int i)
 
 const string& string::operator+=(const string& s)
 {
-	std::cout << "+= operator" << std::endl;
-	int index = 0;
-	for (int i = strlen(str); index<strlen(s.str); i++) {
-		*(str+i) = *(s.str+index);
-		index++;
-	}
-	return *this;
+	return *this + s;
 }
 
 const string& string::operator+(const string& s)
 {
-	std::cout << "+ operator" << std::endl;
+	int str_len = strlen(str);
+	int s_str_len = strlen(s.str);
 	int index = 0;
-	for (int i = strlen(str); index<strlen(s.str); i++) {
+	for (int i = str_len; index<s_str_len; i++) {
 		*(str+i) = *(s.str+index);
 		index++;
 	}
@@ -86,26 +72,14 @@ const string& string::operator=(const string& s)
 {
 	std::cout << "Assignment Operator" << std::endl;
 	str = new char[strlen(s.str)];
-	for (int i = 0; i<strlen(s.str); i++) {
-		*(str+i) = *(s.str+i);
-	}
+	*this + s;
 	return *this;
 }
 
 
-char* string::append(char* new_str)
+const string& string::append(const string& new_str)
 {
-	char* result = new char[strlen(str)+strlen(new_str)];
-	for (int i=0; i<strlen(str); i++) {
-		result[i] += str[i];
-	}
-	int index = 0;
-	for (int i=strlen(str); i<strlen(str)+strlen(new_str); i++) {
-		result[i] += new_str[index];
-		++index;
-	}
-	str = result;
-	return str;
+	return *this + new_str;
 }
 
 int string::get_size() const
@@ -118,12 +92,12 @@ char* string::getStr() const
 	return str;
 }
 
-string::~string() 
-{	
-	if (this->str != nullptr) {
-	std::cout << "Destructor" << std::endl;
-	delete str; 
-	} 
+string::~string()
+{
+	if (str!=nullptr) {
+		std::cout << "Destructor" << std::endl;
+		delete[] str;
+	}
 }
 
 string::string()
@@ -135,18 +109,23 @@ string::string()
 
 string::string(char* new_str)
 {
+	assert(new_str != nullptr);
 	std::cout << "Constructor" << std::endl;
-	str = new char[strlen(new_str)];
-	for (int i=0; i<strlen(new_str)+1; i++) {
+	int s_len = strlen(new_str);
+	str = new char[s_len];
+	for (int i=0; i<s_len+1; i++) {
 		str[i] = new_str[i];
 	}
 }
 
 string::string(const string& value)
 {
+	assert(value.str != nullptr);
 	std::cout << "Copy Constructor" << std::endl;
-	str = new char[value.get_size()];
-	for (int i=0; i<value.get_size(); i++) {
-		str[i] = value.getStr()[i];
+	int v_length = value.get_size();
+	char * v_str = value.getStr();
+	str = new char[v_length];
+	for (int i=0; i<v_length; i++) {
+		str[i] = v_str[i];
 	}
 }
