@@ -24,8 +24,7 @@ void test_operators()
 	string f1(f_1);
 	string f2(f_2);
 	bool t = f2 < f1;
-	bool test = new_str < my_str;
-	//std::cout << "aaa < xx " << t  << " "<< true<< std::endl;
+	std::cout << "aaa < xx " << t  << " "<< true<< std::endl;
 	char test3[] = "Hello world wrld";
 	char test4[] = "wrld";
 	string str(test3);

@@ -9,6 +9,7 @@ bool string::find_first_of(const string& s)
 	int s_str = strlen(s.str);
 	int str_len = strlen(str);
 	char * test = new char[s_str];
+	assert(test!=nullptr);
 	for (int i = 0; i<str_len; i++) {
 		if (str[i] == s.str[0]) {
 			int count = i;
@@ -21,6 +22,7 @@ bool string::find_first_of(const string& s)
 			} else {
 				delete [] test;
 				test = new char[s_str];
+				assert(test!=nullptr);
 			}
 		}
 	}
@@ -39,8 +41,18 @@ const string& string::swap(string& s)
 
 bool string::operator<(const string& s)
 {
-	if (strcmp(str, s.str) < 0) {
-		return true;
+	int len;
+	if (strlen(str) > strlen(s.str)) {
+		len = strlen(str);	
+	} else {
+		len = strlen(s.str);
+	}	
+	for (int i = 0; i<len; i++) {
+		if (int(str[i]) < int(s.str[i])) {
+			return true;
+		} else if (int(str[i]) < int(s.str[i])) {
+			return false;
+		}
 	}
 	return false;
 }
@@ -72,6 +84,7 @@ const string& string::operator=(const string& s)
 {
 	std::cout << "Assignment Operator" << std::endl;
 	str = new char[strlen(s.str)];
+	assert(str!=nullptr);
 	*this + s;
 	return *this;
 }
@@ -113,6 +126,7 @@ string::string(char* new_str)
 	std::cout << "Constructor" << std::endl;
 	int s_len = strlen(new_str);
 	str = new char[s_len];
+	assert(str!=nullptr);
 	for (int i=0; i<s_len+1; i++) {
 		str[i] = new_str[i];
 	}
@@ -124,7 +138,9 @@ string::string(const string& value)
 	std::cout << "Copy Constructor" << std::endl;
 	int v_length = value.get_size();
 	char * v_str = value.getStr();
+	assert(v_str!=nullptr);
 	str = new char[v_length];
+	assert(str!=nullptr);
 	for (int i=0; i<v_length; i++) {
 		str[i] = v_str[i];
 	}
