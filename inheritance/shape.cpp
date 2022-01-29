@@ -1,5 +1,80 @@
 #include "shape.hpp"
 
+#include <cmath>
+
+int Circle::get_area() const
+{
+	return (3.14*pow(radius, 2));
+}
+
+const Circle& Circle::operator=(const Circle& r)
+{
+	radius = r.radius;
+	return *this;
+}
+
+bool Circle::operator==(const Circle& r)
+{
+	if (radius==r.radius) {
+		return true;
+	}
+	return false;
+}
+
+Circle::Circle()
+	: radius(1)
+{
+}
+
+Circle::Circle(const Circle& r)
+{
+	*this = r;
+}
+
+Circle::Circle(int w)
+	: radius(w)
+{
+}
+
+int Triangle::get_area() const
+{
+	return (get_height()*get_width()/2);
+}
+
+const Triangle& Triangle::operator=(const Triangle& r)
+{
+	set_height(r.get_height());
+	set_width(r.get_width());
+	return *this;
+}
+
+bool Triangle::operator==(const Triangle& r)
+{
+	if (get_height()==r.get_height() && get_width()==r.get_width()) {
+		return true;
+	}
+	return false;
+}
+
+Triangle::Triangle()
+{
+	set_height(1);
+	set_width(1);
+}
+
+Triangle::Triangle(const Triangle& r)
+{
+	set_height(r.get_height());
+	set_width(r.get_width());
+}
+
+Triangle::Triangle(int w, int h)
+{
+	set_height(h);
+	set_width(w);
+}
+
+
 int Rectangle::get_area() const
 {
 	return (get_height()*get_width());

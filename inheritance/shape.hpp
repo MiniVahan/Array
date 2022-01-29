@@ -27,4 +27,28 @@ class Rectangle : public Shape {
 		bool operator==(const Rectangle& s);
 };
 
+class Triangle : public Shape {
+	public:
+		int get_area() const;
+	public:
+		Triangle();
+		Triangle(int h,int w);
+		Triangle(const Triangle& s);
+		const Triangle& operator=(const Triangle& s);
+		bool operator==(const Triangle& s);
+};
+
+
+class Circle : public Shape {
+	private:
+		int radius;
+	public:
+		int get_area() const;
+	public:
+		Circle();
+		Circle(int r);
+		Circle(const Circle& s);
+		const Circle& operator=(const Circle& s);
+		bool operator==(const Circle& s);
+};
 #endif
