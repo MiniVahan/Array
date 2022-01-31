@@ -14,7 +14,7 @@ void test_operators()
 	my_str.swap(new_str);
 	std::cout<<"After swap "<< '\n' << "my_str = " << my_str.getStr() << std::endl;
 	std::cout << "new_str = " << new_str.getStr() << std::endl;
-	my_str+new_str;
+	string sum = my_str+new_str;
 	//std::cout << "after operator +" << my_str.getStr() << std::endl;
 	my_str += new_str;
 	//std::cout << my_str.getStr() << std::endl;

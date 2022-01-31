@@ -7,9 +7,8 @@
 bool string::find_first_of(const string& s)
 {
 	int s_str = strlen(s.str);
-	int str_len = strlen(str);
 	char * test = new char[s_str];
-	assert(test!=nullptr);
+	int str_len = strlen(str);
 	for (int i = 0; i<str_len; i++) {
 		if (str[i] == s.str[0]) {
 			int count = i;
@@ -43,14 +42,14 @@ bool string::operator<(const string& s)
 {
 	int len;
 	if (strlen(str) > strlen(s.str)) {
-		len = strlen(str);	
+		len = strlen(str);
 	} else {
 		len = strlen(s.str);
-	}	
+	}
 	for (int i = 0; i<len; i++) {
 		if (int(str[i]) < int(s.str[i])) {
 			return true;
-		} else if (int(str[i]) < int(s.str[i])) {
+		} else if (int(str[i]) > int(s.str[i])) {
 			return false;
 		}
 	}
@@ -59,7 +58,10 @@ bool string::operator<(const string& s)
 
 char string::operator[](int i)
 {
-	return str[i];
+	if (str!=nullptr && i<strlen(str) && i>=0) {
+		return str[i];
+	}
+	return '\0';
 }
 
 const string& string::operator+=(const string& s)
@@ -126,7 +128,6 @@ string::string(char* new_str)
 	std::cout << "Constructor" << std::endl;
 	int s_len = strlen(new_str);
 	str = new char[s_len];
-	assert(str!=nullptr);
 	for (int i=0; i<s_len+1; i++) {
 		str[i] = new_str[i];
 	}
@@ -134,13 +135,10 @@ string::string(char* new_str)
 
 string::string(const string& value)
 {
-	assert(value.str != nullptr);
 	std::cout << "Copy Constructor" << std::endl;
 	int v_length = value.get_size();
 	char * v_str = value.getStr();
-	assert(v_str!=nullptr);
 	str = new char[v_length];
-	assert(str!=nullptr);
 	for (int i=0; i<v_length; i++) {
 		str[i] = v_str[i];
 	}
