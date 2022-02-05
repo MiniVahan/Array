@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <cassert>
-
-class list::node
+template <typename T>
+class list<T>::node
 {
 public:
     value_type m_value;
@@ -23,9 +23,10 @@ public:
     }
 };
 
-std::ostream& operator<<(std::ostream& out, const list& l)
+template <int>
+std::ostream& operator<<(std::ostream& out,const list<int>& l)
 {
-    list::node* current = l.m_head;
+    list<int>::node* current = l.m_head;
     while (current != nullptr) {
         out << current->m_value << " ";
         current = current->m_next;
@@ -33,7 +34,8 @@ std::ostream& operator<<(std::ostream& out, const list& l)
     return out;
 }
 
-list::size_type list::size() const
+template <typename T>
+typename list<T>::size_type list<T>::size() const
 {
     node* current = m_head;
     size_type count = 0;
@@ -44,13 +46,65 @@ list::size_type list::size() const
     return count;
 }
 
-bool list::empty() const
+template <typename T>
+void list<T>::swap(node* n,node *p)
+{
+    value_type value = n->m_value;
+	n->m_value = p->m_value;
+	p->m_value = value;
+}
+
+template <typename T>
+void list<T>::selection_sort()
+{
+    node* current = m_head;
+   	node* next = nullptr;
+	node* small = nullptr;
+	assert(current != nullptr);
+    for (size_type i = 0; i < size()-1; i++) {
+    	next = current->m_next;
+		assert(next != nullptr);
+	    T min = current->m_value;
+	    for (size_type j=i+1; j < size(); j++) {
+	    	if (next->m_value < min) {
+				min = next->m_value;
+				small = next;
+			}
+			next = next->m_next;
+	    }
+		if (min != current->m_value) {
+			swap(current, small);
+		}
+        current = current->m_next;
+    }
+}
+
+template <typename T>
+void list<T>::bubble_sort()
+{
+    node* current = nullptr;
+   	node* next = nullptr;
+    for (size_type i = 0; i < size()-1; i++) {
+    	current = m_head;
+	    for (size_type j = 0; j < size()-1; j++) {
+			next = current->m_next;
+	    	if (next->m_value < current->m_value) {
+				swap(current, next);
+			}
+        	current = current->m_next;
+	    }
+    }
+}
+
+template <typename T>
+bool list<T>::empty() const
 {
     return (m_head == nullptr);
 }
 
 
-void list::push_front(const value_type& value)
+template <typename T>
+void list<T>::push_front(const value_type& value)
 {
     node* new_node = new node(value, m_head, nullptr);
 	if (m_head == nullptr) {
@@ -63,7 +117,8 @@ void list::push_front(const value_type& value)
 }
 
 
-void list::push_back(const value_type& value)
+template <typename T>
+void list<T>::push_back(const value_type& value)
 {
 	node* new_node = new node(value, nullptr, m_tail);
 	if (m_head == nullptr) {
@@ -75,7 +130,8 @@ void list::push_back(const value_type& value)
 	}
 }
 
-void list::pop_front()
+template <typename T>
+void list<T>::pop_front()
 {
     assert(m_head != nullptr);
     node* n = m_head;
@@ -83,7 +139,8 @@ void list::pop_front()
     delete n;
 }
 
-void list::pop_back()
+template <typename T>
+void list<T>::pop_back()
 {
 	assert(m_tail != nullptr);
 	if (m_tail == m_head) {
@@ -96,7 +153,8 @@ void list::pop_back()
 	}
 }
 
-list::node* list::access_helper(const size_type& index) const
+template <typename T>
+typename list<T>::node* list<T>::access_helper(const size_type& index) const
 {
     assert(index >= 0);
     assert(index < size());
@@ -109,21 +167,24 @@ list::node* list::access_helper(const size_type& index) const
     return current;
 }
 
-list::value_type list::access(const size_type& index) const
+template <typename T>
+typename list<T>::value_type list<T>::access(const size_type& index) const
 {
     node* current = access_helper(index);
     assert(current != nullptr);
     return current->m_value;
 }
 
-list::list()
+template <typename T>
+list<T>::list()
     : m_head(nullptr)
 	, m_tail(nullptr)
 {
 	std::cout << "Default constructor" << std::endl;
 }
 
-list::list(size_type n, const value_type& default_value)
+template <typename T>
+list<T>::list(size_type n, const value_type& default_value)
     : m_head(nullptr)
 	, m_tail(nullptr)
 {
@@ -141,7 +202,8 @@ list::list(size_type n, const value_type& default_value)
     }
 }
 
-list::list(const list& b)
+template <typename T>
+list<T>::list(const list& b)
 {
 	std::cout << "Copy constructor" << std::endl;
 	while (! empty()) {
@@ -163,14 +225,16 @@ list::list(const list& b)
 
 
 
-const list& list::operator=(const list& c)
+template <typename T>
+const list<T>& list<T>::operator=(const list& c)
 {
 	std::cout << "Assignment Operator" << std::endl;
     this->m_head = c.m_head;
     return *this;
 }
 
-list::~list()
+template <typename T>
+list<T>::~list()
 {
 	std::cout <<"Destructor" << std::endl;
 	while (! empty()) {

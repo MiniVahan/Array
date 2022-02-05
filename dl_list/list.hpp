@@ -4,12 +4,13 @@
 
 #include <ostream>
 
+template <typename T>
 class list
 {
 private:
     class node;
 public:
-    typedef int value_type;
+    typedef T value_type;
     typedef unsigned int size_type;
 private:
 	node* access_helper(const size_type& index) const;
@@ -22,7 +23,11 @@ public:
 	void push_back(const value_type& value);
     void pop_front();
     void pop_back();
-    friend std::ostream& operator<<(std::ostream& out, const list& l);
+	void swap(node* n,node* p);
+    void selection_sort();
+    void bubble_sort();
+    template <int>
+    friend std::ostream& operator<<(std::ostream& out, const list<int>& l);
 
 private:
     node* m_head;
