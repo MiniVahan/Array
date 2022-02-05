@@ -88,6 +88,20 @@ void test_bubble_sort()
     }
 }
 
+void test_insert_sort()
+{
+    list<int> l;
+    assert(l.empty());
+    for (list<int>::size_type i = 0; i < 8; ++i) {
+        l.push_front(2 * i);
+    }
+	l.insert_sort();
+    assert(l.size() == 8);
+    for (list<int>::size_type i = 0; i < 8; ++i) {
+        assert(l.access(i) == int(i*2));
+    }
+}
+
 void test_copy_constructor()
 {
 	list<int> b(5, 0);
@@ -110,6 +124,7 @@ int main()
     test_copy_constructor();
 	test_selection_sort();
 	test_bubble_sort();
+	test_insert_sort();
     return 0;
 
 }

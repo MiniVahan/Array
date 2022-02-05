@@ -26,6 +26,7 @@ public:
 	void swap(node* n,node* p);
     void selection_sort();
     void bubble_sort();
+    void insert_sort();
     template <int>
     friend std::ostream& operator<<(std::ostream& out, const list<int>& l);
 

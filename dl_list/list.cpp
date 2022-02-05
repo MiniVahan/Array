@@ -97,6 +97,23 @@ void list<T>::bubble_sort()
 }
 
 template <typename T>
+void list<T>::insert_sort()
+{
+    node* current = m_head;
+	node* next = nullptr;
+    for (size_type i = 0; i < size()-1; i++) {
+		next = current->m_next;
+		while (next->m_prev != nullptr) {
+			if (next->m_prev->m_value > next->m_value) {
+				swap(next, next->m_prev);
+			}
+        	next = next->m_prev;
+	    }
+		current = current->m_next;
+    }
+}
+
+template <typename T>
 bool list<T>::empty() const
 {
     return (m_head == nullptr);
